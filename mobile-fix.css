@@ -1,0 +1,172 @@
+/* 手机和平板完全自适应修复 */
+
+/* 确保所有容器都不会超出屏幕 */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* 主内容区域 */
+.main-content {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* 内容区块 */
+.topic-section {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* 所有文本元素 */
+.topic-section h1,
+.topic-section h2,
+.topic-section h3,
+.topic-section h4,
+.topic-section p,
+.topic-section li,
+.topic-section td,
+.topic-section th {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+/* 表格自适应 */
+table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table thead,
+table tbody,
+table tfoot,
+table tr,
+table th,
+table td {
+    display: table-cell;
+    white-space: normal;
+}
+
+/* 代码和预格式文本 */
+pre, code {
+    overflow-x: auto;
+    max-width: 100%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* 图片 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 列表 */
+ul, ol {
+    padding-left: 1.5rem;
+    overflow-x: hidden;
+}
+
+/* 手机端优化 */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px; /* 防止iOS自动缩放 */
+    }
+
+    .main-content {
+        padding: 1rem;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .topic-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .topic-section h2 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+
+    .topic-section h3 {
+        font-size: 1.2rem;
+        line-height: 1.3;
+    }
+
+    .term {
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.5rem 0.3rem;
+        min-width: 60px;
+    }
+}
+
+/* 小屏手机 */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 0.75rem;
+    }
+
+    .topic-section {
+        padding: 0.75rem;
+        border-radius: 4px;
+    }
+
+    .topic-section h2 {
+        font-size: 1.25rem;
+    }
+
+    .topic-section h3 {
+        font-size: 1.1rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 0.4rem 0.2rem;
+    }
+}
+
+/* iPad优化 */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .main-content {
+        padding: 1.5rem;
+    }
+
+    .topic-section {
+        padding: 1.5rem;
+    }
+}

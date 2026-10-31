@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 :root {
     --primary-color: #2c5f2d;
     --secondary-color: #97c4a5;
@@ -21,13 +26,17 @@ body {
     color: var(--text-color);
     background: var(--bg-color);
     overflow-x: hidden;
+    width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 16px; /* Prevent iOS auto-zoom */
 }
 
 .container {
     display: flex;
     min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Sidebar */
@@ -57,11 +66,19 @@ body {
 
 .menu-toggle {
     display: none;
-    background: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: var(--primary-color);
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    line-height: 1;
 }
 
 .nav-links {
@@ -96,6 +113,63 @@ body {
     flex: 1;
     padding: 2rem;
     max-width: 1200px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.page-header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    word-wrap: break-word;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Content Sections */
+.topic-section {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.topic-section * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.topic-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.topic-section h3 {
+    color: var(--accent-color);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.topic-section h4 {
+    color: #555;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .page-header {
@@ -277,6 +351,12 @@ tr:nth-child(even) {
 
 /* Mobile Responsive (Phone) */
 @media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+    }
+
     .sidebar {
         transform: translateX(-100%);
         width: 280px;
@@ -295,14 +375,18 @@ tr:nth-child(even) {
         margin-left: 0;
         padding: 1rem;
         width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .page-header {
         padding: 1rem 0;
+        width: 100%;
     }
 
     .page-header h1 {
         font-size: 1.8rem;
+        word-wrap: break-word;
     }
 
     .subtitle {
@@ -310,36 +394,58 @@ tr:nth-child(even) {
     }
 
     .topic-section {
-        padding: 1.5rem;
+        padding: 1rem;
         margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     .topic-section h2 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        word-wrap: break-word;
     }
 
     .topic-section h3 {
         font-size: 1.2rem;
+        word-wrap: break-word;
     }
 
     .topic-section h4 {
         font-size: 1.1rem;
     }
 
+    .topic-section p,
+    .topic-section li {
+        font-size: 1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
     .key-terms {
         gap: 0.8rem;
+        width: 100%;
     }
 
     .term {
         padding: 0.8rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     table {
         font-size: 0.85rem;
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+        -webkit-overflow-scrolling: touch;
     }
 
     th, td {
-        padding: 0.5rem;
+        padding: 0.5rem 0.3rem;
+        min-width: 60px;
+        white-space: normal;
+        word-wrap: break-word;
     }
 
     /* Better touch targets for mobile */
@@ -347,10 +453,20 @@ tr:nth-child(even) {
         padding: 1rem 1.5rem;
         font-size: 1rem;
     }
+
+    ul, ol {
+        padding-left: 1.5rem;
+        overflow-x: hidden;
+    }
 }
 
 /* Small phones */
 @media (max-width: 480px) {
+    .main-content {
+        padding: 0.75rem;
+        width: 100%;
+    }
+
     .page-header h1 {
         font-size: 1.5rem;
     }
@@ -361,15 +477,21 @@ tr:nth-child(even) {
     }
 
     .topic-section {
-        padding: 1rem;
+        padding: 0.75rem;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     .topic-section h2 {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
 
     .topic-section h3 {
         font-size: 1.1rem;
+    }
+
+    .term {
+        padding: 0.6rem;
     }
 
     table {
@@ -377,7 +499,8 @@ tr:nth-child(even) {
     }
 
     th, td {
-        padding: 0.4rem;
+        padding: 0.4rem 0.2rem;
+        font-size: 0.8rem;
     }
 }
 
