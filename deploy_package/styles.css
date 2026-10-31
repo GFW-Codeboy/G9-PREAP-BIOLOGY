@@ -30,6 +30,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px; /* Prevent iOS auto-zoom */
+    /* 支持iPhone刘海屏安全区域 */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 .container {
@@ -331,6 +336,16 @@ tr:nth-child(even) {
         --sidebar-width: 240px;
     }
 
+    /* iPad上保持侧边栏可见 */
+    .sidebar {
+        transform: translateX(0);
+    }
+
+    /* iPad上隐藏汉堡按钮 */
+    .menu-toggle {
+        display: none;
+    }
+
     .main-content {
         margin-left: 240px;
         padding: 1.5rem;
@@ -349,17 +364,38 @@ tr:nth-child(even) {
     }
 }
 
+/* iPad Mini and smaller tablets */
+@media (max-width: 820px) and (min-width: 769px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: block !important;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
 /* Mobile Responsive (Phone) */
 @media (max-width: 768px) {
     html, body {
         overflow-x: hidden;
         width: 100%;
         max-width: 100%;
+        position: relative;
     }
 
     .sidebar {
         transform: translateX(-100%);
-        width: 280px;
+        width: 85vw;
+        max-width: 320px;
     }
 
     .sidebar.active {
@@ -368,7 +404,7 @@ tr:nth-child(even) {
     }
 
     .menu-toggle {
-        display: block;
+        display: block !important;
     }
 
     .main-content {
@@ -380,7 +416,7 @@ tr:nth-child(even) {
     }
 
     .page-header {
-        padding: 1rem 0;
+        padding: 3.5rem 0 1rem 0; /* 给汉堡按钮留空间 */
         width: 100%;
     }
 
@@ -402,17 +438,20 @@ tr:nth-child(even) {
     }
 
     .topic-section h2 {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         word-wrap: break-word;
+        line-height: 1.4;
     }
 
     .topic-section h3 {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         word-wrap: break-word;
+        line-height: 1.4;
     }
 
     .topic-section h4 {
         font-size: 1.1rem;
+        line-height: 1.4;
     }
 
     .topic-section p,
@@ -420,6 +459,7 @@ tr:nth-child(even) {
         font-size: 1rem;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        line-height: 1.6;
     }
 
     .key-terms {
@@ -434,7 +474,7 @@ tr:nth-child(even) {
     }
 
     table {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         display: block;
         overflow-x: auto;
         width: 100%;
@@ -442,8 +482,8 @@ tr:nth-child(even) {
     }
 
     th, td {
-        padding: 0.5rem 0.3rem;
-        min-width: 60px;
+        padding: 0.6rem 0.4rem;
+        min-width: 70px;
         white-space: normal;
         word-wrap: break-word;
     }
@@ -451,7 +491,10 @@ tr:nth-child(even) {
     /* Better touch targets for mobile */
     .nav-links a {
         padding: 1rem 1.5rem;
-        font-size: 1rem;
+        font-size: 1.05rem;
+        min-height: 48px; /* iOS/Android最小触摸区域 */
+        display: flex;
+        align-items: center;
     }
 
     ul, ol {
@@ -460,11 +503,47 @@ tr:nth-child(even) {
     }
 }
 
-/* Small phones */
+/* iPhone SE, 小米小屏手机 */
+@media (max-width: 375px) {
+    .main-content {
+        padding: 0.75rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .topic-section {
+        padding: 0.75rem;
+    }
+
+    .topic-section h2 {
+        font-size: 1.4rem;
+    }
+
+    .topic-section h3 {
+        font-size: 1.15rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.5rem 0.3rem;
+        min-width: 60px;
+    }
+}
+
+/* Small phones - iPhone SE, 小米Redmi等 */
 @media (max-width: 480px) {
     .main-content {
         padding: 0.75rem;
         width: 100%;
+    }
+
+    .page-header {
+        padding: 3.5rem 0 0.75rem 0;
     }
 
     .page-header h1 {
@@ -472,26 +551,35 @@ tr:nth-child(even) {
     }
 
     .sidebar {
-        width: 85vw;
-        max-width: 280px;
+        width: 90vw;
+        max-width: 300px;
     }
 
     .topic-section {
         padding: 0.75rem;
         width: 100%;
         overflow-x: hidden;
+        border-radius: 6px;
     }
 
     .topic-section h2 {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
     }
 
     .topic-section h3 {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .topic-section h4 {
+        font-size: 1.05rem;
     }
 
     .term {
         padding: 0.6rem;
+        font-size: 0.95rem;
     }
 
     table {
@@ -499,8 +587,14 @@ tr:nth-child(even) {
     }
 
     th, td {
-        padding: 0.4rem 0.2rem;
+        padding: 0.4rem 0.25rem;
         font-size: 0.8rem;
+        min-width: 55px;
+    }
+
+    .nav-links a {
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
     }
 }
 
@@ -515,6 +609,10 @@ tr:nth-child(even) {
     .topic-section {
         padding: 2.5rem;
     }
+
+    .menu-toggle {
+        display: none !important;
+    }
 }
 
 /* Extra large screens */
@@ -526,7 +624,31 @@ tr:nth-child(even) {
     }
 }
 
-/* Landscape mobile */
+/* Large phones - iPhone Pro Max, 小米大屏 */
+@media (min-width: 414px) and (max-width: 768px) {
+    .topic-section h2 {
+        font-size: 1.6rem;
+    }
+
+    .topic-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .topic-section p,
+    .topic-section li {
+        font-size: 1.05rem;
+    }
+
+    table {
+        font-size: 0.95rem;
+    }
+
+    th, td {
+        padding: 0.7rem 0.5rem;
+    }
+}
+
+/* Landscape mode for phones */
 @media (max-height: 500px) and (orientation: landscape) {
     .sidebar-header {
         padding: 1rem 1.5rem;
@@ -538,6 +660,17 @@ tr:nth-child(even) {
 
     .nav-links a {
         padding: 0.6rem 1.5rem;
+    }
+
+    .menu-toggle {
+        top: 0.5rem;
+        left: 0.5rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 1.5rem;
+    }
+
+    .page-header {
+        padding-top: 3rem;
     }
 }
 
