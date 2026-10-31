@@ -20,6 +20,9 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background: var(--bg-color);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -37,6 +40,7 @@ body {
     overflow-y: auto;
     transition: transform 0.3s ease;
     z-index: 1000;
+    -webkit-overflow-scrolling: touch;
 }
 
 .sidebar-header {
@@ -200,6 +204,13 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
+    overflow-x: auto;
+    display: block;
+}
+
+table tbody {
+    display: table;
+    width: 100%;
 }
 
 th, td {
@@ -240,14 +251,40 @@ tr:nth-child(even) {
     margin-bottom: 1rem;
 }
 
-/* Mobile Responsive */
+/* Tablet Responsive (iPad) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    :root {
+        --sidebar-width: 240px;
+    }
+
+    .main-content {
+        margin-left: 240px;
+        padding: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .topic-section {
+        padding: 1.8rem;
+    }
+
+    table {
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile Responsive (Phone) */
 @media (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);
+        width: 280px;
     }
 
     .sidebar.active {
         transform: translateX(0);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
     }
 
     .menu-toggle {
@@ -257,14 +294,127 @@ tr:nth-child(even) {
     .main-content {
         margin-left: 0;
         padding: 1rem;
+        width: 100%;
+    }
+
+    .page-header {
+        padding: 1rem 0;
     }
 
     .page-header h1 {
         font-size: 1.8rem;
     }
 
+    .subtitle {
+        font-size: 1rem;
+    }
+
     .topic-section {
         padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .topic-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .topic-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .topic-section h4 {
+        font-size: 1.1rem;
+    }
+
+    .key-terms {
+        gap: 0.8rem;
+    }
+
+    .term {
+        padding: 0.8rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+
+    /* Better touch targets for mobile */
+    .nav-links a {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .sidebar {
+        width: 85vw;
+        max-width: 280px;
+    }
+
+    .topic-section {
+        padding: 1rem;
+    }
+
+    .topic-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .topic-section h3 {
+        font-size: 1.1rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 0.4rem;
+    }
+}
+
+/* Large screens (desktop) */
+@media (min-width: 1025px) {
+    .main-content {
+        max-width: 1200px;
+        margin-left: calc(var(--sidebar-width) + 2rem);
+        margin-right: auto;
+    }
+
+    .topic-section {
+        padding: 2.5rem;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1400px) {
+    .main-content {
+        max-width: 1400px;
+        margin-left: calc(var(--sidebar-width) + 4rem);
+        padding: 3rem;
+    }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .sidebar-header {
+        padding: 1rem 1.5rem;
+    }
+
+    .sidebar-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .nav-links a {
+        padding: 0.6rem 1.5rem;
     }
 }
 
@@ -283,4 +433,31 @@ tr:nth-child(even) {
         box-shadow: none;
         border: 1px solid var(--border-color);
     }
+}
+
+/* Images and media */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Prevent text overflow */
+.topic-section p,
+.topic-section li,
+.topic-section td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Better focus states for accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
