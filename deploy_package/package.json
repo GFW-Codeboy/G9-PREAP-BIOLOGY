@@ -1,0 +1,8 @@
+{
+  "name": "biology-study-guide",
+  "version": "1.0.0",
+  "description": "Biology study guide website",
+  "scripts": {
+    "start": "python -m http.server 8000"
+  }
+}

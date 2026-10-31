@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Large image files (optional - uncomment if images are too large)
+# *.jpg
+# *.jpeg
+# *.png
+
+# Temporary files
+*.tmp
+*.bak
+
+# OCR output (might be regenerated)
+extracted_text/
+organized_content/
+
+# Generated documents
+*.docx
